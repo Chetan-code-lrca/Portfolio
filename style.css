@@ -1,0 +1,531 @@
+/* ===================================
+   NEON CYBERPUNK AI PORTFOLIO
+   Chetan Inaganti 2026
+   Minimal code, maximum impact
+   =================================== */
+
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0015;
+  background: radial-gradient(ellipse at center, #120025 0%, #0a0015 100%);
+  color: #e0e0ff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #0a0015 0%, #1a0033 50%, #0a0015 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle animated background effect */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 30% 50%, rgba(0,240,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(255,0,170,0.1) 0%, transparent 50%);
+  animation: rotate-bg 30s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate-bg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.neon-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 900;
+  color: #00f0ff;
+  text-shadow: 
+    0 0 10px #00f0ff,
+    0 0 20px #00f0ff,
+    0 0 40px #00f0ff,
+    0 0 80px #00f0ff;
+  animation: glow-pulse 3s ease-in-out infinite alternate;
+  letter-spacing: 0.1em;
+  z-index: 1;
+  position: relative;
+}
+
+@keyframes glow-pulse {
+  from {
+    text-shadow: 
+      0 0 10px #00f0ff,
+      0 0 20px #00f0ff,
+      0 0 40px #00f0ff;
+  }
+  to {
+    text-shadow: 
+      0 0 20px #00f0ff,
+      0 0 30px #00f0ff,
+      0 0 60px #00f0ff,
+      0 0 100px #00f0ff;
+  }
+}
+
+.tagline {
+  font-size: clamp(1rem, 3vw, 2rem);
+  margin-top: 1.5rem;
+  color: #ff00aa;
+  text-shadow: 
+    0 0 10px #ff00aa,
+    0 0 20px #ff00aa;
+  font-weight: 600;
+  z-index: 1;
+  position: relative;
+}
+
+.sub-tagline {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  margin-top: 0.8rem;
+  color: #a020f0;
+  text-shadow: 0 0 10px #a020f0;
+  font-weight: 300;
+  z-index: 1;
+  position: relative;
+}
+
+/* Profile Photo */
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 30px;
+  border: 3px solid #00f0ff;
+  box-shadow: 
+    0 0 20px #00f0ff,
+    0 0 40px rgba(0, 240, 255, 0.5),
+    inset 0 0 20px rgba(0, 240, 255, 0.3);
+  z-index: 1;
+  position: relative;
+  animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===================================
+   SECTION COMMONS
+   =================================== */
+.section {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #a020f0;
+  text-align: center;
+  margin-bottom: 60px;
+  text-shadow: 
+    0 0 15px #a020f0,
+    0 0 30px #a020f0;
+  letter-spacing: 0.05em;
+}
+
+/* ===================================
+   GLASS CARD (About Section)
+   =================================== */
+.glass-card {
+  background: rgba(20, 0, 40, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 
+    0 8px 32px rgba(0, 240, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 
+    0 12px 48px rgba(0, 240, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.glass-card p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #d0d0ff;
+}
+
+.glass-card strong {
+  color: #00f0ff;
+  font-weight: 600;
+}
+
+.glass-card a {
+  color: #ff00aa;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+.glass-card a:hover {
+  border-bottom-color: #ff00aa;
+  text-shadow: 0 0 8px #ff00aa;
+}
+
+/* ===================================
+   SKILLS GRID
+   =================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+}
+
+.skill-pill {
+  background: rgba(0, 240, 255, 0.08);
+  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  border-radius: 12px;
+  padding: 20px 15px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #00f0ff;
+  transition: all 0.35s ease;
+  cursor: default;
+}
+
+.skill-pill:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 20px rgba(0, 240, 255, 0.5),
+    inset 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* ===================================
+   PROJECTS GRID
+   =================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  padding: 0 20px;
+}
+
+.project-card {
+  background: rgba(30, 0, 50, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 0, 170, 0.3);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(255, 0, 170, 0.15);
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+  border-color: rgba(255, 0, 170, 0.6);
+  box-shadow: 
+    0 10px 40px rgba(255, 0, 170, 0.4),
+    0 0 30px rgba(255, 0, 170, 0.3);
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(255,0,170,0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255,0,170,0.3);
+}
+
+.placeholder-text {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 25px;
+}
+
+.project-content h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  color: #00f0ff;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px rgba(0,240,255,0.5);
+}
+
+.project-desc {
+  color: #d0d0ff;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.project-tech {
+  font-size: 0.9rem;
+  color: #a020f0;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-neon {
+  display: inline-block;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1.5px solid #ff00aa;
+  border-radius: 8px;
+  color: #ff00aa;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+  background: rgba(255, 0, 170, 0.15);
+  box-shadow: 
+    0 0 15px rgba(255, 0, 170, 0.6),
+    inset 0 0 10px rgba(255, 0, 170, 0.2);
+  transform: scale(1.05);
+}
+
+/* ===================================
+   CERTIFICATES MARQUEE (RIGHT-TO-LEFT)
+   =================================== */
+.certificates-section {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 80px 0;
+}
+
+.marquee-container {
+  overflow: hidden;
+  padding: 30px 0;
+  position: relative;
+  border-top: 1px solid rgba(0, 240, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 0, 170, 0.3);
+  background: rgba(10, 0, 25, 0.6);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 40px;
+  animation: scroll-rtl 30s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* -50% because we duplicated items */
+  }
+}
+
+.cert-item {
+  flex-shrink: 0;
+  min-width: 240px;
+  text-align: center;
+}
+
+.cert-placeholder {
+  width: 240px;
+  height: 160px;
+  background: linear-gradient(135deg, rgba(160,32,240,0.3), rgba(0,240,255,0.3));
+  border: 2px solid rgba(160, 32, 240, 0.6);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e0e0ff;
+  box-shadow: 
+    0 0 15px rgba(160, 32, 240, 0.4),
+    inset 0 0 20px rgba(160, 32, 240, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cert-item:hover .cert-placeholder {
+  border-color: rgba(160, 32, 240, 1);
+  box-shadow: 
+    0 0 25px rgba(160, 32, 240, 0.7),
+    inset 0 0 30px rgba(160, 32, 240, 0.2);
+  transform: scale(1.05);
+}
+
+/* To use real images instead of placeholders, replace .cert-placeholder with: */
+.cert-item img {
+  width: 240px;
+  height: 160px;
+  object-fit: cover;
+  border: 2px solid rgba(160, 32, 240, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(160, 32, 240, 0.4);
+  transition: all 0.3s ease;
+}
+
+.cert-item:hover img {
+  border-color: rgba(160, 32, 240, 1);
+  box-shadow: 0 0 25px rgba(160, 32, 240, 0.7);
+  transform: scale(1.05);
+}
+
+.marquee-hint {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #a0a0d0;
+  font-style: italic;
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+.footer {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.footer h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  color: #00f0ff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px #00f0ff;
+}
+
+.social-links {
+  margin: 20px 0;
+  font-size: 1.1rem;
+}
+
+.social-links a {
+  color: #ff00aa;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: all 0.3s;
+}
+
+.social-links a:hover {
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff;
+}
+
+.copyright {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 15px;
+  }
+
+  .section-title {
+    margin-bottom: 40px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 15px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .glass-card {
+    padding: 25px;
+  }
+
+  .neon-name {
+    font-size: 2.5rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+
+  .marquee-content {
+    animation-duration: 20s; /* Faster on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .cert-item {
+    min-width: 180px;
+  }
+
+  .cert-placeholder {
+    width: 180px;
+    height: 120px;
+    font-size: 1rem;
+  }
+
+  .cert-item img {
+    width: 180px;
+    height: 120px;
+  }
+}
