@@ -170,7 +170,15 @@
     <p class="copyright">© 2026 Chetan Inaganti • Neural Architect • Built with 💜 & neon vibes</p>
   </footer>
 
+  <!-- Certificate Modal -->
+  <div id="cert-modal" class="modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modal-img">
+    <div id="modal-caption"></div>
+  </div>
+
   <script>
+    // Hero Canvas Particles
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -237,6 +245,39 @@
     initCanvas();
     for (let i = 0; i < 60; i++) particles.push(new Particle());
     animate();
+
+    // Certificate Modal Logic
+    const modal = document.getElementById('cert-modal');
+    const modalImg = document.getElementById('modal-img');
+    const captionText = document.getElementById('modal-caption');
+    const certImages = document.querySelectorAll('.cert-item img');
+    const closeModal = document.querySelector('.close-modal');
+    const carousel = document.querySelector('.carousel-3d');
+
+    certImages.forEach(img => {
+      img.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+        carousel.style.animationPlayState = 'paused';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      });
+    });
+
+    closeModal.onclick = function() {
+      modal.style.display = "none";
+      carousel.style.animationPlayState = 'running';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close on outside click
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        carousel.style.animationPlayState = 'running';
+        document.body.style.overflow = 'auto';
+      }
+    }
   </script>
 
 </body>
