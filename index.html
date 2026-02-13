@@ -6,6 +6,21 @@
   <title>Chetan Inaganti – Neural Architect | AI/ML Engineer</title>
   <meta name="description" content="Chetan Inaganti | AI/ML Engineer | Building production-grade models with Python, PyTorch, GenAI | Open to collaborations & roles in 2026"/>
   <meta name="keywords" content="Chetan Inaganti, AI Engineer, Machine Learning, Python, PyTorch, Portfolio, SPSU"/>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chetan-code-lrca.github.io/">
+  <meta property="og:title" content="Chetan Inaganti – Neural Architect | AI/ML Engineer">
+  <meta property="og:description" content="AI/ML Engineer specializing in Python, PyTorch, and GenAI. 2nd Year B.Tech CSE Student at SPSU.">
+  <meta property="og:image" content="https://chetan-code-lrca.github.io/images/profile.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://chetan-code-lrca.github.io/">
+  <meta property="twitter:title" content="Chetan Inaganti – Neural Architect | AI/ML Engineer">
+  <meta property="twitter:description" content="AI/ML Engineer specializing in Python, PyTorch, and GenAI. 2nd Year B.Tech CSE Student at SPSU.">
+  <meta property="twitter:image" content="https://chetan-code-lrca.github.io/images/profile.jpg">
+
   <link rel="stylesheet" href="style.css"/>
   <!-- Neon futuristic fonts from Google -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
@@ -14,10 +29,11 @@
   
   <!-- HERO SECTION -->
   <div class="hero">
+    <canvas id="hero-canvas"></canvas>
     <div class="profile-photo">
       <img src="images/profile.jpg" alt="Chetan Inaganti"/>
     </div>
-    <h1 class="neon-name">CHETAN INAGANTI</h1>
+    <h1 class="neon-name glitch" data-text="CHETAN INAGANTI">CHETAN INAGANTI</h1>
     <p class="tagline">AI/ML Engineer • Python • PyTorch • GenAI Builder</p>
     <p class="sub-tagline">Turning neural networks into production reality</p>
   </div>
@@ -173,6 +189,75 @@
     </div>
     <p class="copyright">© 2026 Chetan Inaganti • Neural Architect • Built with 💜 & neon vibes</p>
   </footer>
+
+  <script>
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function initCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2;
+        this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff00aa';
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+        
+        // Connect particles
+        particles.forEach(p2 => {
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = 1 - (dist / 100);
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    for (let i = 0; i < 60; i++) particles.push(new Particle());
+    animate();
+  </script>
 
 </body>
 </html>
