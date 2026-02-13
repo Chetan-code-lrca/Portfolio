@@ -392,36 +392,51 @@ html {
 }
 
 /* ===================================
-   CERTIFICATES (3D CIRCLE CAROUSEL)
+   CERTIFICATES (PRO 3D CAROUSEL)
    =================================== */
 .certificates-section {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 100px 0;
+  background: #05000a;
+  padding: 120px 0;
+  position: relative;
   overflow: hidden;
 }
 
 .carousel-3d-container {
   width: 100%;
-  height: 450px;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1500px;
+  perspective: 2000px; /* Deeper perspective */
   position: relative;
-  background: rgba(10, 0, 25, 0.2);
+}
+
+/* The Glowing Floor/Platter */
+.carousel-3d-container::before {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+  transform: rotateX(90deg) translateZ(-200px);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .carousel-3d {
   position: relative;
-  width: 240px;
-  height: 160px;
+  width: 280px;
+  height: 180px;
   transform-style: preserve-3d;
-  animation: rotate-3d 30s linear infinite;
-  will-change: transform;
+  /* Slight tilt for better 3D depth */
+  transform: rotateX(-5deg); 
+  animation: rotate-3d-pro 40s linear infinite;
+  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .carousel-3d:hover {
   animation-play-state: paused;
+  cursor: grab;
 }
 
 .carousel-3d .cert-item {
@@ -431,49 +446,68 @@ html {
   width: 100%;
   height: 100%;
   transform-origin: center;
-  /* (360 / 7 items) = 51.42deg */
-  transform: rotateY(calc(var(--i) * 51.42deg)) translateZ(450px);
-  backface-visibility: hidden;
+  /* Circular math for 7 items */
+  transform: rotateY(calc(var(--i) * (360deg / 7))) translateZ(500px);
 }
 
 .carousel-3d .cert-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 2px solid rgba(0, 240, 255, 0.4);
+  border: 2px solid rgba(0, 240, 255, 0.3);
   border-radius: 12px;
-  box-shadow: 
-    0 0 20px rgba(0, 240, 255, 0.3),
-    inset 0 0 15px rgba(0, 240, 255, 0.1);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Cyberpunk glow */
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  /* Reflection effect */
+  -webkit-box-reflect: below 15px linear-gradient(transparent, transparent, rgba(0,0,0,0.2));
+  transition: all 0.5s ease;
+  filter: brightness(0.7) contrast(1.1);
 }
 
+/* Make the front-most item pop */
 .carousel-3d .cert-item:hover img {
+  filter: brightness(1.1) contrast(1.2);
   border-color: #00f0ff;
-  box-shadow: 0 0 40px #00f0ff;
-  transform: scale(1.1) translateY(-10px);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+  transform: scale(1.1);
 }
 
-@keyframes rotate-3d {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+@keyframes rotate-3d-pro {
+  from { transform: rotateX(-5deg) rotateY(0deg); }
+  to { transform: rotateX(-5deg) rotateY(360deg); }
 }
 
 .marquee-hint {
   text-align: center;
-  margin-top: 40px;
-  font-size: 1rem;
-  color: #00f0ff;
+  margin-top: 60px;
+  font-size: 0.9rem;
+  color: #ff00aa;
   font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #00f0ff;
-  animation: pulse-hint 2s infinite ease-in-out;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px #ff00aa;
 }
 
-@keyframes pulse-hint {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+/* Mobile Fixes for 3D Ring */
+@media (max-width: 1200px) {
+  .carousel-3d .cert-item {
+    transform: rotateY(calc(var(--i) * (360deg / 7))) translateZ(400px);
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-3d-container { height: 400px; }
+  .carousel-3d { width: 200px; height: 130px; }
+  .carousel-3d .cert-item {
+    transform: rotateY(calc(var(--i) * (360deg / 7))) translateZ(280px);
+  }
+  .carousel-3d-container::before { width: 400px; height: 400px; }
+}
+
+@media (max-width: 480px) {
+  .carousel-3d .cert-item {
+    transform: rotateY(calc(var(--i) * (360deg / 7))) translateZ(200px);
+  }
 }
 
 /* ===================================
