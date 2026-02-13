@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="style.css"/>
   <!-- Neon futuristic fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
 </head>
 <body>
   
@@ -168,7 +168,7 @@
       <a href="https://x.com/Chetan007329" target="_blank" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
       <a href="https://dev.to/chetancodelrca" target="_blank" title="dev.to"><i class="fab fa-dev"></i></a>
       <a href="https://www.linkedin.com/in/chetan-inaganti-563a41322/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="https://discordapp.com/users/910385317781037066" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+      <a href="javascript:void(0);" onclick="copyToClipboard('chetan007329')" title="Copy Discord Username: chetan007329"><i class="fab fa-discord"></i></a>
     </div>
     <p class="copyright">© 2026 Chetan Inaganti • Neural Architect • Built with 💜 & neon vibes</p>
   </footer>
@@ -181,6 +181,15 @@
   </div>
 
   <script>
+    // Copy to clipboard for Discord
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(function() {
+        alert("Discord username copied to clipboard: " + text);
+      }, function(err) {
+        console.error('Could not copy text: ', err);
+      });
+    }
+
     // Hero Canvas Particles
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
